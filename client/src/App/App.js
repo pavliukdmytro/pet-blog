@@ -5,14 +5,14 @@ import {
     Switch
 } from 'react-router-dom';
 import './App.scss';
-import Menu from './components/Menu/Menu.jsx';
+import Header from "./components/Header/Header.jsx";
 import Home from './pages/Main.jsx';
 
 
 const App = () => {
     return (
         <Router>
-            <Menu />
+            <Header />
             <Switch>
                 <Route path="/test" exect>
                     test page!!!

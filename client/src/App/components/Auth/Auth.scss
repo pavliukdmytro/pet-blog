@@ -1,0 +1,11 @@
+.authorization-container{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	position: relative;
+	svg{
+		width: 30px;
+		height: 30px;
+		flex-shrink: 0;
+	}
+}
