@@ -8,6 +8,10 @@ const dbConfig = config.get('db_config');
 
 app.use(express.static('./client/public'));
 
+app.get('/api/get/:name', require('./api/get-api'));
+
+// console.log(require('./api/get-api'));
+
 app.get('*', (req,res) => {
    res.sendFile(path.join(__dirname + '/client/public/index.html'));
 });
