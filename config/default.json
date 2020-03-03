@@ -4,5 +4,6 @@
         "port": "27017",
         "dbName": "pet_blog"
     },
-    "port": "3000"
+    "port": "3000",
+    "jwtSecret": "my wery secret key"
 }

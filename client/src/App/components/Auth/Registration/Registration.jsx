@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
+import MaskedInput from 'react-text-mask';
+import emailMask from 'text-mask-addons/dist/emailMask';
 
 function Registration() {
-    const [name, setName] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState('');
 
-    const [message, setMessage] = useState('my message');
-    const [errorMessage, setErrorMessage] = useState('my error');
+    const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    function sendPostData() {
-        if(name === '' || password === '' || confirmPassword === '') {
+    async function sendPostData() {
+        if(userName === '' || password === '' || confirmPassword === '') {
             setErrorMessage('все поля должны быть заполнены');
             return;
         } else if(password !== confirmPassword) {
@@ -17,14 +19,22 @@ function Registration() {
             return;
         }
         setErrorMessage('');
+        setMessage('');
 
-        fetch('/auth/registration', {
+       const response = await fetch('/auth/registration', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({name, password})
-        })
+            body: JSON.stringify({userName, password})
+        });
+       const data = await response.json();
+       if(data.ok) {
+           setMessage(data.message);
+       } else {
+           setErrorMessage(data.error);
+       }
+       // console.log(data);
     }
 
     return (
@@ -35,12 +45,12 @@ function Registration() {
             {
                 errorMessage && <p className="message-error">{errorMessage}</p>
             }
-
-            <input type="text"
-                   value={name}
-                   onChange={(e) => setName(e.target.value)}
-                   placeholder="name"
-            />
+            <MaskedInput
+                mask={emailMask}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="email"
+            ></MaskedInput>
             <input type="password"
                    value={password}
                    onChange={(e) => setPassword(e.target.value)}
