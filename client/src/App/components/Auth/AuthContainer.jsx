@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useSpring, animated} from 'react-spring';
 
 import './AuthContainer.scss';
-import Authorization from './Authorization/Authorization.jsx';
+import Authorization from '../../containers/Auth/Authorization/Authorization.js';
 import Registration from './Registration/Registration.jsx';
 
 function AuthContainer() {

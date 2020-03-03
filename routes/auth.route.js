@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../middleware/auth.middleware.js');
 
 router.post('/registration', [
     check('userName').isEmail(),
@@ -33,14 +34,16 @@ router.post('/registration', [
             password: hashedPassword
         });
         await createUser.save();
+        
+        console.log(createUser._id);
 
         const token = jwt.sign(
-            {userId: user._id},
+            {userId: createUser._id},
             config.get('jwtSecret'),
             { expiresIn: 30 * 60 }
         );
 
-        res.status(201).json({ok: true, token, userId: user.id, message: 'create new user'});
+        res.status(201).json({ok: true, token, userId: createUser.id, message: 'create new user'});
     } catch (err) {
         console.error(err);
         res.json({error: 'server error'});
@@ -72,6 +75,14 @@ router.post('/authorization',[
     console.log(token);
     res.json({ok: true, token, userId: user.id});
 
+});
+
+router.get('/checkauth', auth, (req, res) => {
+    if(req.user) {
+        res.status(200).json({ok: true});
+    } else {
+        res.status(401).json({ok: false});
+    }
 });
 
 module.exports = router;

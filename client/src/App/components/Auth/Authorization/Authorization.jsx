@@ -4,13 +4,13 @@ import emailMask from 'text-mask-addons/dist/emailMask';
 
 import './Authorization.scss';
 
-function Authorizarion() {
+function Authorizarion(props) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    
     async function sendPostData() {
         if(userName === '' || password === '') {
             setErrorMessage('все поля должны быть заполнены');
@@ -32,8 +32,11 @@ function Authorizarion() {
         } else {
             setErrorMessage(data.error);
         }
-        console.log(data);
-    }
+        
+        props.addCurrentUser({token: data.token, userId: data.userId});
+        localStorage.setItem("token", JSON.stringify({token: data.token, userId: data.userId}));
+    };
+    //console.log(props);
 
     return(
         <div className="authorization">
