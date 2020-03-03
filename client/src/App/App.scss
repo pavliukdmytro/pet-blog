@@ -1,7 +1,19 @@
+:root {
+	--c-dark-green: #1B2D1E;
+	--с-darc-grey: #454237;
+	--c-grey: #BFBEAF;
+	--с-brown: #867671;
+	--с-cream: #D4DED6;
+	--c-white: #fff;
+	--c-success: #4BB543;
+	--c-error: #ff3333;
+}
 .container{
 	max-width: 1366px;
 	margin-left: auto;
 	margin-right: auto;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 body {

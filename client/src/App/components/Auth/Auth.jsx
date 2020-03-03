@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import UserSvg from '../../../images/user.svg';
 
 import './Auth.scss';
-import Authorizarion from "./Authorization/Authorization.jsx";
+import AuthConteiner from "./AuthContainer.jsx";
 
 function Auth() {
     const [showAuth, setShowAuth] = useState(false);
@@ -11,11 +11,25 @@ function Auth() {
         setShowAuth(!showAuth);
     };
 
+    const checkAnotherClick = (e) => {
+        // console.log(e.target);
+        if(!e.target.closest('.auth-container')) {
+            setShowAuth(false);
+        }
+    };
+
+    useEffect(() => {
+        if(showAuth) {
+            document.addEventListener('click', checkAnotherClick);
+        }
+        return () => document.removeEventListener('click', checkAnotherClick);
+    }, [showAuth]);
+
     return(
         <div className="authorization-container">
             <UserSvg onClick={showAuthBlock} />
             {   showAuth &&
-                <Authorizarion />
+                <AuthConteiner />
             }
         </div>
     )
