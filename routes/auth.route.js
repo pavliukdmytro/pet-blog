@@ -34,8 +34,8 @@ router.post('/registration', [
             password: hashedPassword
         });
         await createUser.save();
-        
-        console.log(createUser._id);
+
+        console.log(createUser);
 
         const token = jwt.sign(
             {userId: createUser._id},
@@ -43,7 +43,12 @@ router.post('/registration', [
             { expiresIn: 30 * 60 }
         );
 
-        res.status(201).json({ok: true, token, userId: createUser.id, message: 'create new user'});
+        res.status(201).json({
+            ok: true, token,
+            userId: createUser.id,
+            userName: createUser.userName,
+            message: 'create new user'
+        });
     } catch (err) {
         console.error(err);
         res.json({error: 'server error'});
@@ -73,7 +78,7 @@ router.post('/authorization',[
         { expiresIn: 30 * 60 }
         );
     console.log(token);
-    res.json({ok: true, token, userId: user.id});
+    res.json({ok: true, token, userId: user.id, userName: userName});
 
 });
 

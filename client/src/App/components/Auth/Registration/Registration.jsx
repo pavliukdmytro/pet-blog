@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import MaskedInput from 'react-text-mask';
 import emailMask from 'text-mask-addons/dist/emailMask';
 
-function Registration() {
+function Registration(props) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState('');
@@ -10,7 +10,7 @@ function Registration() {
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    async function sendPostData() {
+    async function sendPostData(key, value) {
         if(userName === '' || password === '' || confirmPassword === '') {
             setErrorMessage('все поля должны быть заполнены');
             return;
@@ -31,10 +31,14 @@ function Registration() {
        const data = await response.json();
        if(data.ok) {
            setMessage(data.message);
+           const {token, userId, userName} = data;
+           props.addCurrentUser({token, userId, userName});
+           localStorage.setItem('user', JSON.stringify({token, userId, userName}));
        } else {
            setErrorMessage(data.error);
        }
-       // console.log(data);
+       // console.log();
+        console.log(props);
     }
 
     return (

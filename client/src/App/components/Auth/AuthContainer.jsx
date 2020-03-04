@@ -3,7 +3,7 @@ import {useSpring, animated} from 'react-spring';
 
 import './AuthContainer.scss';
 import Authorization from '../../containers/Auth/Authorization/Authorization.js';
-import Registration from './Registration/Registration.jsx';
+import Registration from '../../containers/Auth/Registration/Registration.js';
 
 function AuthContainer() {
     const springProps = useSpring({

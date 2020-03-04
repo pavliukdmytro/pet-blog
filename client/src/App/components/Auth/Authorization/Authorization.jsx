@@ -10,7 +10,7 @@ function Authorizarion(props) {
 
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    
+
     async function sendPostData() {
         if(userName === '' || password === '') {
             setErrorMessage('все поля должны быть заполнены');
@@ -28,13 +28,13 @@ function Authorizarion(props) {
         const data = await response.json();
 
         if(data.ok) {
+            const {token, userId, userName} = data;
             setMessage(data.message);
+            props.addCurrentUser({token, userId, userName});
+            localStorage.setItem('user', JSON.stringify({token, userId, userName}));
         } else {
             setErrorMessage(data.error);
         }
-        
-        props.addCurrentUser({token: data.token, userId: data.userId});
-        localStorage.setItem("token", JSON.stringify({token: data.token, userId: data.userId}));
     };
     //console.log(props);
 

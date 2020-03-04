@@ -1,41 +1,45 @@
-import React, {useEffect, createContext, Provider, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Route,
     BrowserRouter  as Router,
     Switch
 } from 'react-router-dom';
 import './App.scss';
-import Header from "./Header/Header.jsx";
+import Header from "../containers/Header/Header.js";
 import Home from '../pages/Main.jsx';
+import {AuthContext} from '../../context/auth.context.js';
 
 
 const App = (props) => {
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-    const userToken = createContext(token);
-    
+    let user = localStorage.getItem('user');
+    if(user){
+        user = JSON.parse(user);
+    }
+
     useEffect( () => {
         const checkUser = async () => {
-            if(token) {
                 const response = await fetch('/auth/checkauth', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token.token}`
+                        'Authorization': `Bearer ${user.token}`
                     }
                 });
                 const data = await response.json();
                 if(data.ok) {
-                    props.addCurrentUser(JSON.parse(localStorage.getItem('token')));
+                    props.addCurrentUser(user);
                 } else {
                     props.removeCurrentUser();
                 }
-            }
+
         };
-        checkUser();
+        if(user){
+            checkUser();
+        }
     }, []);
-    
+
     return (
-        <userToken.Provider value={props.currentUser}>
+        <AuthContext.Provider value={{token: 'token'}}>
             <Router>
                 <Header />
                 <Switch>
@@ -47,7 +51,7 @@ const App = (props) => {
                     </Route>
                 </Switch>
             </Router>
-        </userToken.Provider>
+        </AuthContext.Provider>
     )
 };
 
