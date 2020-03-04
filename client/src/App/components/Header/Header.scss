@@ -1,7 +1,10 @@
 header{
 	display: grid;
-	grid-template-columns: 1fr 50px;
+	grid-template-columns: 1fr auto 50px;
+	grid-column-gap: 10px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border: 1px solid var(--c-dark-green);
+	//.header-logout{
+	//}
 }

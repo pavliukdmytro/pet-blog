@@ -13,6 +13,7 @@ app.use(express.static('./client/public'));
 app.use(bodyParser.json());
 
 app.get('/api/get/:name', require('./api/get-api'));
+app.use('/post', require('./routes/post.route'));
 
 app.use('/auth', require('./routes/auth.route.js'));
 

@@ -58,7 +58,7 @@ function Authorizarion(props) {
                    placeholder="password"
             />
             <button className="submit" onClick={sendPostData}>
-                Регистрация
+                Авторизация
             </button>
         </div>
     )

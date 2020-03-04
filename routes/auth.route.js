@@ -35,7 +35,7 @@ router.post('/registration', [
         });
         await createUser.save();
 
-        console.log(createUser);
+        // console.log(createUser);
 
         const token = jwt.sign(
             {userId: createUser._id},

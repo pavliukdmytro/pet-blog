@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Header from '../../components/Header/Header.jsx';
-
+import {removeCurrentUser} from '../../../storage/actions/actions.js';
 
 const mapStateToProps = (state) => {
     return {
@@ -8,6 +8,9 @@ const mapStateToProps = (state) => {
     }
 };
 
+const mapDispatchToProps = { removeCurrentUser };
+
 export default connect(
-    mapStateToProps, null
+    mapStateToProps,
+    mapDispatchToProps
 )(Header);

@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
-import {AuthContext} from '../../../context/auth.context.js';
 import './Header.scss';
 import Menu from "../Menu/Menu.jsx";
 import Auth from "../Auth/Auth.jsx";
 
 function Header(props) {
-    const auth = useContext(AuthContext);
+    const logOut = () => {
+        props.removeCurrentUser();
+        localStorage.removeItem('user');
+    };
     return(
         <header className="container">
             <Menu />
@@ -13,7 +15,13 @@ function Header(props) {
                 props.user && props.user.userName &&
                 <span>{props.user.userName}</span>
             }
-            <Auth />
+            {
+                props.user && props.user.userName ?
+                    <span
+                        className="header-logout"
+                        onClick={logOut}
+                    >logout</span> : <Auth />
+            }
         </header>
     )
 }

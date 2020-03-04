@@ -7,8 +7,6 @@ import {
 import './App.scss';
 import Header from "../containers/Header/Header.js";
 import Home from '../pages/Main.jsx';
-import {AuthContext} from '../../context/auth.context.js';
-
 
 const App = (props) => {
     let user = localStorage.getItem('user');
@@ -39,19 +37,17 @@ const App = (props) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{token: 'token'}}>
-            <Router>
-                <Header />
-                <Switch>
-                    <Route path="/test" exect>
-                        test page!!!
-                    </Route>
-                    <Route path="/" exect>
-                        <Home />
-                    </Route>
-                </Switch>
-            </Router>
-        </AuthContext.Provider>
+        <Router>
+            <Header />
+            <Switch>
+                <Route path="/test" exect>
+                    test page!!!
+                </Route>
+                <Route path="/" exect>
+                    <Home />
+                </Route>
+            </Switch>
+        </Router>
     )
 };
 
