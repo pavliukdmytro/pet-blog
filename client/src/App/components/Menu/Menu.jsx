@@ -24,8 +24,7 @@ function Menu() {
 
     return (
         <div className="menu">
-            {
-                menu &&
+            { menu &&
                     menu.map((link, i) => (
                         <NavLink
                             key={i}

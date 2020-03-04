@@ -1,0 +1,41 @@
+.post-form{
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0px;
+	input, textarea{
+		border: 1px solid var(--c-dark-green);
+		font-size: 20px;
+		padding: 0px 30px;
+		border-radius: 4px;
+	}
+	input, button{
+		height: 50px;
+	}
+	textarea{
+		resize: none;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	button{
+		background-color: var(--c-dark-green);
+		font-size: 20px;
+		color: var(--c-white);
+		transition: .3s  linear;
+		border-radius: 4px;
+		&:hover{
+			background-color: var(--с-cream);
+			color: var(--c-dark-green);
+		}
+	}
+	& > * {
+		margin-bottom: 30px;
+	}
+	&__error{
+		margin-bottom: 10px;
+		height: 24px;
+		color: var(--c-error);
+	}
+	h1{
+		margin-bottom: 10px;
+	}
+}

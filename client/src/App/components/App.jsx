@@ -4,9 +4,11 @@ import {
     BrowserRouter  as Router,
     Switch
 } from 'react-router-dom';
+
 import './App.scss';
 import Header from "../containers/Header/Header.js";
 import Home from '../pages/Main.jsx';
+import CreatePost from "../pages/CreatePost.jsx";
 
 const App = (props) => {
     let user = localStorage.getItem('user');
@@ -40,8 +42,8 @@ const App = (props) => {
         <Router>
             <Header />
             <Switch>
-                <Route path="/test" exect>
-                    test page!!!
+                <Route path="/create-post" exect>
+                    <CreatePost />
                 </Route>
                 <Route path="/" exect>
                     <Home />

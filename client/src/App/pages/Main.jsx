@@ -1,5 +1,5 @@
 import React from 'react';
-import Posts from '../containers/Posts/Posts.js';
+import Posts from '../containers/Posts/Posts/Posts.js';
 
 function Home(props) {
     console.log(props);
