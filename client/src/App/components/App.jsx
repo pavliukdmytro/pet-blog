@@ -18,6 +18,7 @@ const App = (props) => {
 
     useEffect( () => {
         const checkUser = async () => {
+            try{
                 const response = await fetch('/auth/checkauth', {
                     method: 'GET',
                     headers: {
@@ -28,10 +29,17 @@ const App = (props) => {
                 const data = await response.json();
                 if(data.ok) {
                     props.addCurrentUser(user);
-                } else {
-                    props.removeCurrentUser();
                 }
-
+                else {
+                    props.removeCurrentUser();
+                    localStorage.removeItem('user');
+                }
+                //alert(123);
+            } catch (err) {
+                console.error(err);
+                props.removeCurrentUser();
+                localStorage.removeItem('user');
+            }
         };
         if(user){
             checkUser();

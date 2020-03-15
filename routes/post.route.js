@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
             title,
             body,
             owner: userId
-        });
+        })
         await post.save();
         
         res.status(200).json({ok: true, post: post._doc});
@@ -27,6 +27,12 @@ router.post('/', auth, async (req, res) => {
         console.error(err);
         res.status(500).json({ok: false, error: 'server error'})
     }
+});
+
+router.get('/',  async (req, res) => {
+    const posts = await Post.find()
+    .populate('owner');
+    res.status(200).json(posts);
 });
 
 module.exports = router;

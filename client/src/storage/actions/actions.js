@@ -27,3 +27,10 @@ export const removePost = (postId) => {
         payload: postId
     }
 };
+export const SET_POSTS = 'SET_POSTS';
+export const setPosts = (payload) => {
+    return {
+        type: SET_POSTS,
+        payload
+    }
+};

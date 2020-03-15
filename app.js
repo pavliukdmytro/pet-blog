@@ -6,8 +6,6 @@ const app = express();
 const dbConfig = config.get('db_config');
 const bodyParser = require('body-parser');
 
-
-
 app.use(express.static('./client/public'));
 // parse application/json
 app.use(bodyParser.json());
