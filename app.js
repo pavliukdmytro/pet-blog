@@ -33,7 +33,7 @@ async function start() {
       console.log('Server Error', err.message);
       pocess.exit(1);
    }
-};
+}
 
 start();
 
